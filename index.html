@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>손전등 웹 앱</title>
+    <style>
+        #lightbulb {
+            width: 100px;
+            height: 100px;
+            background-color: #f1c40f;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>function toggleLight() {
+    var lightbulb = document.getElementById("lightbulb");
+    var brightness = document.getElementById("brightness").value;
+    var blinkingSpeed = document.getElementById("blinkingSpeed").value;
+
+    if (lightbulb.style.backgroundColor === "white") {
+        lightbulb.style.backgroundColor = "#f1c40f";
+        lightbulb.style.opacity = brightness / 100;
+        clearInterval(intervalId);
+    } else {
+        lightbulb.style.backgroundColor = "white";
+        intervalId = setInterval(function() {
+            lightbulb.style.opacity = (lightbulb.style.opacity === "0") ? brightness / 100 : "0";
+        }, blinkingSpeed * 1000);
+    }
+}
+</script>
+</head>
+<body>
+    <h1>손전등 웹 앱</h1>
+    <div id="lightbulb"></div>
+    <label for="brightness">빛의 세기:</label>
+    <input type="range" id="brightness" min="0" max="100" step="1" value="100">
+    <br>
+    <label for="blinkingSpeed">깜빡이는 속도(초):</label>
+    <input type="number" id="blinkingSpeed" min="0" step="0.1" value="1">
+    <br>
+    <button onclick="toggleLight()">전등 켜기/끄기</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
